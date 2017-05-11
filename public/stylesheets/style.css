@@ -3,6 +3,15 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.success{
+  background-color: green;
+  color: black;
+}
+
+.failure{
+  background-color: red;
+}
+
 a {
   color: #00B7FF;
 }
