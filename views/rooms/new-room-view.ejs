@@ -1,0 +1,17 @@
+<h2>Add New Room</h2>
+
+<form action="/rooms" method="post" enctype="multipart/form-data">
+  <label for="room-name-input">Room Name</label>
+  <input id="room-name-input" type="text" name="roomName"
+    placeholder="My Awesome Space Room">
+  <br>
+
+  <label for="room-desc-input">Room Description</label>
+  <textarea id="room-desc-input" name="roomDescription"
+    placeholder="It's a beautiful room in Space!"></textarea>
+  <br>
+
+  <label for="room-photo-input">Upload Photo</label>
+  <input id="room-photo-input" type="file" name="roomPhoto">
+  <button>Save Room</button>
+</form>

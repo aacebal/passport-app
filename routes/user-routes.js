@@ -109,4 +109,59 @@ routerThingy.post('/profile/edit',
 );
 
 
+// Query to make people admins in MongoDB shell
+// db.users.updateOne(
+//   { username: 'nizar' },
+//   { $set: { role: 'admin' } }
+// )
+routerThingy.get('/users', (req, res, next) => {
+  // If you are logged in AND and admin LEZ DO THIS
+  if (req.user && req.user.role === 'admin') {
+    User.find((err, usersList) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      res.render('user/users-list-view.ejs', {
+        users: usersList,
+        successMessage: req.flash('success')
+      });
+    });
+  }
+
+  // Otherwise show 404 page
+  else {
+    next();
+  }
+});
+
+
+routerThingy.post('/users/:id/admin', (req, res, next) => {
+  // If you are logged in AND and admin LEZ DO THIS
+  if (req.user && req.user.role === 'admin') {
+    User.findByIdAndUpdate(
+      req.params.id,
+      { role: 'admin' },
+      (err, theUser) => {
+        if (err) {
+          next(err);
+          return;
+        }
+
+        req.flash('success', `User "${theUser.name}" is now an admin. 😎`);
+
+        res.redirect('/users');
+      }
+    );
+    return;
+  }
+
+  // Otherwise show 404 page
+  else {
+    next();
+  }
+});
+
+
 module.exports = routerThingy;
